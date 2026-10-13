@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUITSolutions — Network overhaul for Austin shops with 4–15 computers</title>
+<meta name="description" content="Evaluate and overhaul the network, clean the workflow, and leave a stable environment. Self-manage afterward, or keep light care on a shop that is already quiet. Not a helpdesk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1B5E20;
+  --green-light: #2E7D32;
+  --green-soft: #E8F5E9;
+  --ink: #1A1A1A;
+  --muted: #555;
+  --bg: #FAFAFA;
+  --card: #FFFFFF;
+  --border: #E0E0E0;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+}
+a { color: var(--green); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Header */
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.logo svg { flex-shrink: 0; }
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+.nav-links a { color: var(--ink); font-weight: 500; font-size: 0.95rem; }
+.nav-links a:hover { color: var(--green); }
+.btn {
+  display: inline-block;
+  background: var(--green);
+  color: #fff !important;
+  padding: 0.7rem 1.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn:hover { background: var(--green-light); text-decoration: none; }
+.btn-outline {
+  background: transparent;
+  color: var(--green) !important;
+  border: 2px solid var(--green);
+}
+.btn-outline:hover { background: var(--green-soft); }
+
+/* Hero */
+.hero {
+  padding: 5rem 0 4rem;
+  background: linear-gradient(180deg, #fff 0%, var(--green-soft) 100%);
+  text-align: center;
+}
+.eyebrow {
+  color: var(--green);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  margin: 0 0 1.25rem;
+  font-weight: 600;
+}
+.hero p.lead {
+  font-size: 1.2rem;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+  color: var(--muted);
+}
+.hero .note {
+  font-style: italic;
+  color: var(--green);
+  margin-bottom: 2rem;
+}
+.hero .secondary { margin-top: 1rem; font-size: 0.95rem; color: var(--muted); }
+
+/* Sections */
+section { padding: 4.5rem 0; }
+section h2 {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+section .section-lead {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+/* Fit */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.75rem;
+}
+.card h3 { margin-top: 0; font-family: var(--serif); font-size: 1.4rem; }
+.card ul { padding-left: 1.2rem; margin: 0.75rem 0 0; }
+.card li { margin-bottom: 0.5rem; }
+.closing { text-align: center; margin-top: 2rem; font-weight: 500; }
+
+/* Pillars */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.pillar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--green);
+  border-radius: 8px;
+  padding: 1.75rem;
+}
+.pillar h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+  color: var(--green);
+}
+.pillar p { margin: 0 0 0.75rem; }
+.pillar p:last-child { margin-bottom: 0; }
+
+/* Steps */
+.steps { display: grid; gap: 1.25rem; max-width: 800px; margin: 0 auto; }
+.step {
+  display: flex;
+  gap: 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+.step-num {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--green);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.step h3 { margin: 0 0 0.4rem; font-size: 1.15rem; }
+.step p { margin: 0; }
+
+/* Typical */
+.typical {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.typical .card h3 { color: var(--green); }
+
+/* Form */
+.form-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+}
+form label { display: block; font-weight: 600; margin: 1.25rem 0 0.35rem; }
+form label:first-of-type { margin-top: 0; }
+.hint { font-size: 0.85rem; color: var(--muted); margin: 0 0 0.4rem; font-weight: 400; }
+input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+textarea { min-height: 100px; resize: vertical; }
+.radio-group { margin: 0.5rem 0 1rem; }
+.radio-group label { font-weight: 400; display: flex; align-items: flex-start; gap: 0.5rem; margin: 0.4rem 0; }
+.micro { font-size: 0.85rem; color: var(--muted); margin-top: 1rem; }
+
+/* Footer */
+footer {
+  background: #1A1A1A;
+  color: #ddd;
+  padding: 3rem 0 2rem;
+  font-size: 0.95rem;
+}
+footer a { color: #fff; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
+.footer-nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.legal { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #333; font-size: 0.85rem; color: #999; }
+
+@media (max-width: 800px) {
+  .two-col, .pillars, .typical { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero { padding: 3.5rem 0 3rem; }
+  section { padding: 3rem 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <img src="ruit-logo-transparent.png" alt="RUITSolutions" width="36" height="36" style="display:block;">
+      RUITSolutions
+    </a>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#how">How we work</a>
+      <a href="#fit">Fit</a>
+      <a href="#about">About</a>
+      <a href="#audit" class="btn">Request an audit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Austin area · 4–15 computers, flex to about 25</p>
+      <h1>Network overhaul and a stable environment for Austin shops with 4–15 computers.</h1>
+      <p class="lead">We evaluate what is actually on the floor, rebuild the network and shared systems so they stop fighting the work, and leave the shop able to run it — or keep it quiet in the background.</p>
+      <p class="note">Not a helpdesk. Not a one-hour PC repair.</p>
+      <a href="#audit" class="btn">Request an environment audit</a>
+      <p class="secondary">Printers, phones, and other gear count with the shop. They are not a separate product.</p>
+    </div>
+  </section>
+
+  <section id="fit">
+    <div class="wrap">
+      <h2>Who this is for</h2>
+      <p class="section-lead">If you have a handful of computers and a network that “mostly works” until it doesn’t, this is the engagement. If you need someone to swap a single PC and leave, it is not.</p>
+      <div class="two-col">
+        <div class="card">
+          <h3>A fit</h3>
+          <ul>
+            <li>Austin-area shop, typically 4–15 workstations, sometimes up to about 25</li>
+            <li>Shared files, printers, phones, Wi-Fi, backups — an environment, not one lonely laptop</li>
+            <li>Willing to do a real overhaul, then either run it yourself or keep light care on a shop that is already quiet</li>
+            <li>You want fewer surprises, not a ticket queue</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Not a fit</h3>
+          <ul>
+            <li>One broken computer and no interest in the rest of the environment</li>
+            <li>A large-seat helpdesk with after-hours ticket SLAs</li>
+            <li>Calling someone on site every time a password is forgotten</li>
+            <li>Cycling through a new IT person every week for one-off fixes</li>
+          </ul>
+        </div>
+      </div>
+      <p class="closing">We take a small number of shops at a time so the overhaul is real.</p>
+    </div>
+  </section>
+
+  <section id="work" style="background:#fff;">
+    <div class="wrap">
+      <h2>What we actually do</h2>
+      <p class="section-lead">Three jobs. Everything else is a detail inside one of them.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <h3>1. Evaluate and overhaul the network</h3>
+          <p>Walk the floor. Count what is connected. See what fails.</p>
+          <p>That means workstations, printers, phones, Wi-Fi, switches, firewall, shared storage, backups. How traffic actually moves. What is consumer gear pretending to be business gear. What remote access exists, and whether it is a hole.</p>
+          <p>Then rebuild the parts that are fragile: addressing, Wi-Fi that covers the space, staff vs guest when it earns its keep, a firewall that belongs in a shop, remote access that is deliberate. Write it down so the next person is not guessing.</p>
+        </div>
+        <div class="pillar">
+          <h3>2. Streamline the workflow and the environment</h3>
+          <p>The network is only half of why a shop fights its computers.</p>
+          <p>Shared folders and permissions that match how people actually work. One place for files instead of five. Print, scan, and phone paths that do not require tribal knowledge. Email and logins a 4–15 person shop can live with. Staged PC refresh instead of panic buys. Moving off an aging desktop-as-server, an ISP gateway, or a tool nobody can administer — when the shop is ready, not as a religion.</p>
+          <p>You leave with a short runbook: how backups run, who is admin, what to do when X fails.</p>
+        </div>
+        <div class="pillar">
+          <h3>3. Stabilize — then you run it, or we keep a light hand</h3>
+          <p>Once it is quiet, pick an end state. None of these is “call us every time Outlook blinks.”</p>
+          <p><strong>Hand-off.</strong> You run it from the runbook. We are available for the next planned upgrade.</p>
+          <p><strong>Scheduled tune-ups.</strong> We come back on a cadence and check backups, firewall, and drift.</p>
+          <p><strong>Small retainer.</strong> We keep an eye on a shop that is already stable, because the footprint is small — not because we want a 200-seat desk.</p>
+          <p>Desktop tickets after that are the exception, not the product.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>How an engagement runs</h2>
+      <p class="section-lead">No prototype theater. No 40-page binder. A shop-sized plan, then the work.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Discovery and environment audit</h3>
+            <p>On-site walkthrough of the Austin-area shop. What is connected, what breaks, who does what, where the files live, whether the backup has ever been restored on purpose. You get written findings: what is fragile, what is overbuilt, what to leave alone.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Stabilization plan</h3>
+            <p>A short, priced plan. Order of work: stop the bleeding, clean the network, fix workflow friction, document. You choose the end state on paper — self-manage, scheduled tune-ups, or a small retainer.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Overhaul and transition</h3>
+            <p>The work happens in a window the shop can live with. Firewall, Wi-Fi, file path, identity, printers and phones, staged hardware if it is time. The one or two people who will touch the system day to day get shown how, not handed a mystery.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Hand-off or quiet management</h3>
+            <p>Packet: diagram, admin list, backup proof, “if this fails, do that.” Then you run it, we return on a schedule, or we keep a light retainer on a shop that is already quiet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="typical" style="background:#fff;">
+    <div class="wrap">
+      <h2>What a typical shop looks like</h2>
+      <div class="typical">
+        <div class="card">
+          <h3>Starting point</h3>
+          <p>About eight computers. One aging desktop acting like a server. The ISP’s gateway running the whole network. Wi-Fi that dies in the back. Files in three places. A backup that has never been tested. Someone on staff who “knows the computers” and is tired of it.</p>
+        </div>
+        <div class="card">
+          <h3>Ending point</h3>
+          <p>A firewall that belongs there. Wi-Fi that covers the floor. One file location with permissions that match the work. Printers and phones on a path people can repeat. A backup that has been restored on purpose. A one-page runbook. Either the owner runs it, or we check in because it is quiet enough to check in on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>RUITSolutions</h2>
+      <div class="card" style="max-width:800px; margin:0 auto;">
+        <p>RUITSolutions works with Austin-area operating businesses that have outgrown consumer gear and tribal-knowledge IT. Typical footprint is 4 to 15 computers, sometimes up to about 25, plus the printers, phones, and other endpoints that come with that shop.</p>
+        <p>The work is evaluation, overhaul, workflow cleanup, and a stable environment. Upgrades and ecosystem transitions are part of that when they are the right move — hardware, software, network. Some owners take the hand-off and run it. Some want scheduled tune-ups. Some want a small retainer on a shop that is already quiet.</p>
+        <p>We are selective about how many shops we take at a time. That is the point. A handful of stabilized environments is the model. A rotating queue of one-off repairs is not.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="audit" style="background: var(--green-soft);">
+    <div class="wrap">
+      <h2>Request an environment audit</h2>
+      <p class="section-lead">Three questions first. If the shop is a fit, we go from there.</p>
+      <div class="form-wrap">
+        <form name="audit-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
+          <input type="hidden" name="form-name" value="audit-request">
+          <p style="display:none;"><label>Don’t fill this out: <input name="bot-field"></label></p>
+
+          <label for="count">About how many computers / workstations?</label>
+          <p class="hint">Count the PCs and laptops people work on. Printers and phones are extra; mention them under pressing issues if they matter.</p>
+          <input type="text" id="count" name="workstation-count" required placeholder="e.g. 8">
+
+          <label for="pressing">What is pressing right now?</label>
+          <p class="hint">Wi-Fi dies in the back, shared drive vanished, backup untested, old server acting up, logins are a mess — say it plainly.</p>
+          <textarea id="pressing" name="pressing-issues" required></textarea>
+
+          <label>Primary end goal</label>
+          <div class="radio-group">
+            <label><input type="radio" name="end-goal" value="self-manage" required> Get it stable and we will run it ourselves</label>
+            <label><input type="radio" name="end-goal" value="tune-ups"> Get it stable and check in on a schedule</label>
+            <label><input type="radio" name="end-goal" value="retainer"> Get it stable and have you keep a light hand on it</label>
+            <label><input type="radio" name="end-goal" value="not-sure"> Not sure yet — tell us what you recommend</label>
+          </div>
+
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone">
+
+          <label for="area">Part of the Austin area</label>
+          <input type="text" id="area" name="area" placeholder="e.g. Cedar Park, North Austin">
+
+          <label for="else">Anything else we should know (optional)</label>
+          <textarea id="else" name="other"></textarea>
+
+          <button type="submit" class="btn" style="margin-top:1.5rem; width:100%;">Send audit request</button>
+          <p class="micro">One-off PC repair is not what we take on. If the job is a single broken computer and you do not want the rest of the environment touched, we are not the right shop.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong style="font-family:var(--serif); font-size:1.2rem; color:#fff;">RUITSolutions</strong><br>
+      Austin area<br>
+      <a href="mailto:info@ruitsolutions.com">info@ruitsolutions.com</a><br>
+      <a href="tel:8337848184">833-784-8184</a>
+    </div>
+    <nav class="footer-nav">
+      <a href="#work">Work</a>
+      <a href="#how">How we work</a>
+      <a href="#fit">Fit</a>
+      <a href="#audit">Request an audit</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+  <div class="wrap legal">
+    <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>
